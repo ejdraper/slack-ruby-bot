@@ -93,6 +93,7 @@ module SlackRubyBot
 
         def parse(client, data)
           text = data.text
+          text = data.file.initial_comment.comment if data.file && data.file.initial_comment && data.file.initial_comment.comment && data.file.initial_comment.comment != ''
           return text unless direct_message?(data) && message_from_another_user?(data)
           return text if bot_mentioned_in_message?(text, client.names)
           ["#{client.name} #{text}", text]
